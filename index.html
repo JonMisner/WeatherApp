@@ -4,11 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title Page</title>
+  <title>Weather App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css"/>
 </head>
+
 <body>
 <!-- tiles and title tile-->
+ <div class="container is-fluid">
   <div class="tile is-ancestor">
     <div class="tile is-vertical is-8">
       <div class="tile">
@@ -26,7 +28,7 @@
                 </div>
                 </div>
                     <div class="buttons">
-                        <button class="button is-info">Search</button>
+                        <button class="button is-info" id="searchBtn">Search</button>
                     </div>     
             </article>      
           </article>
@@ -36,7 +38,7 @@
         <div class="tile is-parent">
           <article class="tile is-child notification is-info">
             <p class="subtitle">Today's Weather</p>
-                <div id="todaysWeather"></div>
+                <p id="todaysWeather"></p>
           </article>
         </div>
       </div>
@@ -55,13 +57,19 @@
       <article class="tile is-child notification is-info">
         <div class="content">
           <p class="subtitle">Detailed Info</p>
-          <div class="content" id="detailedInfo"></div>
+          <div class="content" id="detailedInfo" fon="15px"></div>
         </div>
       </article>
     </div>
   </div>
 
-
+  <div class="tile is-ancester">
+    <article class="tile is-parent notification is-warning">
+      <p class="subtitle">Previous Searches</p>
+      <div class="content" id="previousSearches"></div>
+    </article>
+  </div>
+</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="assets/logic.js"></script>
