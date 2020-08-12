@@ -1,6 +1,12 @@
 # WeatherApp
 Weather Dashboard
 
+deployed : https://jonmisner.github.io/weatherApp/
+
+
+
+
+
 
 # 06 Server-Side APIs: Weather Dashboard
 
