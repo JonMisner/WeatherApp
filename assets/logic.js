@@ -1,10 +1,9 @@
 // Variables
 // ========================
 
-var key ="a06fa296342383903aed019474f6fedd";
-// var search =$(".input").val();
-var queryURL ="https://api.openweathermap.org/data/2.5/weather?q="+"chicago"+"&appid="+key;
-var queryDaily = "https://api.openweathermap.org/data/2.5/forecast?q="+"chicago"+"&appid="+key;
+var key ="&appid=a06fa296342383903aed019474f6fedd";
+var queryURL ="https://api.openweathermap.org/data/2.5/weather?q=";
+var queryDaily = "https://api.openweathermap.org/data/2.5/forecast?q=";
 
 
 
@@ -12,30 +11,29 @@ var queryDaily = "https://api.openweathermap.org/data/2.5/forecast?q="+"chicago"
 // ========================
 $(document).ready(function (){
 
-  $("#cities").empty();
+  // $("#cities").empty();
+  var userInput;
+  var cities = [];
 
-  var city = [];
+  $("#searchBtn").on("click",function(){
+    event.preventDefault();
+    userInput = $("#cityInput").val();
+    $("#cityInput").val("");
 
-  $(searchBtn).on("click",function(){
-    var userInput = $(this).siblings('.input').val();
-
-    // var time = $(this).parent().attr('id');
-
-    // localStorage.setItem(time, userInput)
-
+    console.log(userInput);
+    console.log(cities);
+    
+    weatherDisplay(userInput);
+    fiveDay(userInput);
+  
   })
 
 
-
-
-
-
-
-  function weatherDisplay(){
+  function weatherDisplay(userInput){
 
   // api data pull for current weather
 $.ajax({
-   url: queryURL,
+   url: queryURL+userInput+key,
    method: "GET"
  }).then(function(response) {
    console.log(response);
@@ -60,7 +58,25 @@ $.ajax({
 
   console.log(city);
 
- //Append "todays weather" 
+  
+ $("#cities").append("<button class='is-info'>"+city);
+ 
+ $("#cities").on("click",function(){
+  event.preventDefault();
+  $("#cities").empty();
+ 
+  cities[0] = userInput
+  userInput = $("#cityInput").val();
+    $("#cityInput").val("");
+ 
+  weatherDisplay(userInput);
+  fiveDay(userInput);
+  console.log(cities);
+  });
+ 
+ 
+  //Append "todays weather" 
+
 $("#todaysWeather").append(city,"<br>", "Temperature: " + temp + "°", "<br>", image);
 // $("#todaysWeather").append(image);
 
@@ -76,15 +92,16 @@ $("#detailedInfo").append(
 
 }
 
-function fiveDay(){
+function fiveDay(userInput){
 
 // api pull for five day
  $.ajax({
-  url: queryDaily,
+  url: queryDaily+userInput+key,
   method: "GET"
 }).then(function(response) {
   console.log(response);
   console.log(response.list[4].dt_txt);
+  console.log(response.list[4].dt_txt.split("").slice(5,10).join(""));
 
 $("#column1").empty();
 $("#column2").empty();
@@ -95,7 +112,7 @@ $("#column5").empty();
 // five day arrays
 var day1 = [
 //  date
-  response.list[4].dt_txt.split("-")[1],"<br>",
+response.list[4].dt_txt.split("").slice(5,10).join(""),"<br>",
   // image
   $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.list[4].weather[0].icon + ".png"), "<br>",
   // temperature
@@ -103,25 +120,25 @@ var day1 = [
 ];
 
 var day2 = [
-  response.list[12].dt_txt.split("-")[1], "<br>",
+  response.list[12].dt_txt.split("").slice(5,10).join(""), "<br>",
   $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.list[12].weather[0].icon + ".png"), "<br>",
   "Temp: "+((((response.list[12].main.feels_like)-273.15)*1.8)+32).toFixed(0)+"°",
 ];
 
 var day3 = [
-  response.list[20].dt_txt.split("-")[1], "<br>",
+  response.list[20].dt_txt.split("").slice(5,10).join(""), "<br>",
   $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.list[20].weather[0].icon + ".png"), "<br>",
   "Temp: "+((((response.list[20].main.feels_like)-273.15)*1.8)+32).toFixed(0)+"°",
 ];
 
 var day4 = [
-  response.list[28].dt_txt.split("-")[1], "<br>",
+  response.list[28].dt_txt.split("").slice(5,10).join(""), "<br>",
   $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.list[28].weather[0].icon + ".png"), "<br>",
   "Temp: "+((((response.list[28].main.feels_like)-273.15)*1.8)+32).toFixed(0)+"°",
 ];
 
 var day5 = [
-  response.list[36].dt_txt.split("-")[1], "<br>",
+  response.list[36].dt_txt.split("").slice(5,10).join(""), "<br>",
   $("<img>").attr("src", "https://openweathermap.org/img/w/" + response.list[36].weather[0].icon + ".png"), 
   "Temp: "+((((response.list[36].main.feels_like)-273.15)*1.8)+32).toFixed(0)+"°",
 ];
@@ -139,8 +156,8 @@ $("#column5").append(day5);
 
 // calling of functions
 // ========================
-weatherDisplay();
-fiveDay();
+// weatherDisplay();
+// fiveDay();
 
 
 

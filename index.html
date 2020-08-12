@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weather App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css"/>
+  <link rel="stylesheet" href="assets/main.css">
 </head>
 
 <body>
@@ -22,16 +23,17 @@
           <!--CIty Search tile -->
           <article class="tile is-child notification is-warning">
             <div class="container is-fluid">
-            <div class="field">
+              <div class="field">
                 <div class="control">
-                  <input class="input is-info" type="text" placeholder="What City?">
+                  <input id="cityInput" class="input is-info" type="text" placeholder="What City?">
                 </div>
-                </div>
-                    <div class="buttons">
-                        <button class="button is-info" id="searchBtn">Search</button>
-                    </div>     
-            </article>      
-          </article>
+              </div>
+              <div class="buttons">
+                <button class="button is-info" id="searchBtn">Search</button>
+              </div>
+            </div>     
+          </article>      
+          
         </div>
         
         <!-- tile for todays weather -->
@@ -43,11 +45,11 @@
         </div>
       </div>
       
-      <!-- tile for the 5 day forecast -->
+      <!-- tile for the cities -->
       <div class="tile is-parent">
         <article class="tile is-child notification is-warning">
           <p class="subtitle">Cities</p>
-          <div class="content" id="cities"> </div>
+          <div class="content is fluid" id="cities"> </div>
         </article>
       </div>
     </div>
@@ -62,12 +64,13 @@
       </article>
     </div>
   </div>
-
+  
+<!-- five day forecast -->
   <div class="tile is-ancester">
     <article class="tile is-parent notification is-primary">
       <div class="content" id="forecast">
         <div class="columns has-text-centered">
-          <div class="column is-3 subtitle">Five Day:</div>
+          <div class="column subtitle">Five Day:</div>
           <div class="column" id= "column1"></div>
           <div class="column" id= "column2"></div>
           <div class="column" id= "column3"></div>
