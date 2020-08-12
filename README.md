@@ -1,6 +1,12 @@
 # WeatherApp
 Weather Dashboard
 
+deployed : https://jonmisner.github.io/weatherApp/
+
+<img src = "assets/deployed.png">
+
+
+
 
 <img src = "assets/deployed.png">
 
